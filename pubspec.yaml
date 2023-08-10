@@ -18,8 +18,11 @@ dependencies:
   shelf: ^1.4.1
   shelf_router: ^1.1.4
   shelf_static: ^1.1.2
+  http: ^0.13.3
   #state management
-
+  provider: ^6.0.5
+  #others
+  flutter_svg: ^2.0.7
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -42,7 +45,6 @@ flutter:
         - asset: assets/fonts/SF-Pro-Display-Black.ttf
         - asset: assets/fonts/SF-Pro-Display-BlackItalic.ttf
         - asset: assets/fonts/SF-Pro-Display-Bold.ttf
-        - asset: assets/fonts/SF-Pro-Display-Bold-Italic.ttf
         - asset: assets/fonts/SF-Pro-Display-Heavy.ttf
         - asset: assets/fonts/SF-Pro-Display-HeavyItalic.ttf
         - asset: assets/fonts/SF-Pro-Display-Light.ttf
