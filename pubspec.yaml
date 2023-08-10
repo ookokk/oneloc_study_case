@@ -1,0 +1,80 @@
+name: oneloc_study_case
+description: A new Flutter project.
+
+publish_to: 'none'
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.6 <4.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  #backend
+  shelf: ^1.4.1
+  shelf_router: ^1.1.4
+  shelf_static: ^1.1.2
+  #state management
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+
+
+  uses-material-design: true
+
+
+  assets:
+    - assets/images/
+
+
+  fonts:
+    - family: SF-Pro
+      fonts:
+        - asset: assets/fonts/SF-Pro-Display-Black.ttf
+        - asset: assets/fonts/SF-Pro-Display-BlackItalic.ttf
+        - asset: assets/fonts/SF-Pro-Display-Bold.ttf
+        - asset: assets/fonts/SF-Pro-Display-Bold-Italic.ttf
+        - asset: assets/fonts/SF-Pro-Display-Heavy.ttf
+        - asset: assets/fonts/SF-Pro-Display-HeavyItalic.ttf
+        - asset: assets/fonts/SF-Pro-Display-Light.ttf
+        - asset: assets/fonts/SF-Pro-Display-LightItalic.ttf
+        - asset: assets/fonts/SF-Pro-Display-Medium.ttf
+        - asset: assets/fonts/SF-Pro-Display-MediumItalic.ttf
+        - asset: assets/fonts/SF-Pro-Display-Regular.ttf
+        - asset: assets/fonts/SF-Pro-Display-RegularItalic.ttf
+        - asset: assets/fonts/SF-Pro-Display-Semibold.ttf
+        - asset: assets/fonts/SF-Pro-Display-SemiboldItalic.ttf
+        - asset: assets/fonts/SF-Pro-Display-Thin.ttf
+        - asset: assets/fonts/SF-Pro-Display-ThinItalic.ttf
+        - asset: assets/fonts/SF-Pro-Display-Ultralight.ttf
+        - asset: assets/fonts/SF-Pro-Text-BoldItalic.ttf
+        - asset: assets/fonts/SF-Pro-Text-HeavyItalic.ttf
+        - asset: assets/fonts/SF-Pro-Text-LightItalic.ttf
+        - asset: assets/fonts/sf-pro-text-medium.ttf
+        - asset: assets/fonts/SF-Pro-Text-MediumItalic.ttf
+        - asset: assets/fonts/SF-Pro-Text-RegularItalic.ttf
+        - asset: assets/fonts/SF-Pro-Text-SemiboldItalic.ttf
+
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Black.ttf
+        - asset: assets/fonts/Roboto-BlackItalic.ttf
+        - asset: assets/fonts/Roboto-Bold.ttf
+        - asset: assets/fonts/Roboto-BoldItalic.ttf
+        - asset: assets/fonts/Roboto-Italic.ttf
+        - asset: assets/fonts/Roboto-Light.ttf
+        - asset: assets/fonts/Roboto-LightItalic.ttf
+        - asset: assets/fonts/Roboto-Medium.ttf
+        - asset: assets/fonts/Roboto-MediumItalic.ttf
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Thin.ttf
+        - asset: assets/fonts/Roboto-ThinItalic.ttf
