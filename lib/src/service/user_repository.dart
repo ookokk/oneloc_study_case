@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-class MyBackend {
+class UserRepository {
   final Router _router = Router();
 
-  MyBackend() {
+  UserRepository() {
     _router.get('/', _handleRoot);
     _router.post('/register', _handleRegister);
     _router.post('/login', _handleLogin);

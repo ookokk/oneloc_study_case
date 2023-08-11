@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:oneloc_study_case/src/widgets/register_elevated_button.dart';
 
+import '../../widgets/kvkk_rich_text.dart';
+
 class Screen1 extends StatelessWidget {
   const Screen1({Key? key}) : super(key: key);
 
@@ -42,26 +44,34 @@ class Screen1 extends StatelessWidget {
                   height: 150,
                 ),
                 RegisterElevatedButton(
+                    color: Colors.white,
+                    onTap: () {},
                     child: Image.asset(
                       'assets/images/yeni_hesap_text.png',
                       width: 180,
-                    ),
-                    color: Colors.white,
-                    onTap: () {}),
+                    )),
                 const SizedBox(
                   height: 20,
                 ),
                 RegisterElevatedButton(
-                    child: Text(
+                    color: Colors.transparent.withOpacity(0),
+                    onTap: () {},
+                    child: const Text(
                       'Giriş Yap',
                       style: TextStyle(fontFamily: 'Roboto', fontSize: 18),
-                    ),
-                    color: Colors.transparent.withOpacity(0),
-                    onTap: () {}),
+                    )),
                 const SizedBox(
                   height: 70,
                 ),
-                Image.asset('assets/images/kvkk_text.png')
+                Row(
+                  children: [
+                    Expanded(
+                        child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: kvkkRichText(Colors.white),
+                    )),
+                  ],
+                )
               ],
             ),
           ],
