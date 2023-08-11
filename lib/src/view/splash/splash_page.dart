@@ -24,7 +24,10 @@ class SplashPage extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: Image.asset("assets/images/splash_text.png"),
+              child: Image.asset(
+                "assets/images/splash_text.png",
+                width: 200,
+              ),
             ),
             const SizedBox(
               height: 20,

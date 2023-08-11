@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:oneloc_study_case/src/view/auth/register_page.dart';
+import 'package:oneloc_study_case/src/view/splash/screen1.dart';
 import 'package:oneloc_study_case/src/view/splash/splash_page.dart';
 
 void main() {
@@ -10,6 +12,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SplashPage();
+    return MaterialApp(
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      debugShowCheckedModeBanner: false,
+      home: RegisterPage(),
+    );
   }
 }
