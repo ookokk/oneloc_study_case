@@ -2,8 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:oneloc_study_case/src/constants/colors/color.dart';
 
-class SplashPage extends StatelessWidget {
+import 'screen1.dart';
+
+class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
+
+  @override
+  _SplashPageState createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  @override
+  void initState() {
+    super.initState();
+    // 2 saniye sonra Screen1 sayfasına yönlendirme yapılacak
+    Future.delayed(Duration(seconds: 2), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                const Screen1()), // Yönlendirme yapılacak sayfa
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

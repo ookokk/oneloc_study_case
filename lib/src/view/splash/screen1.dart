@@ -45,7 +45,9 @@ class Screen1 extends StatelessWidget {
                 ),
                 RegisterElevatedButton(
                     color: Colors.white,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, '/register');
+                    },
                     child: Image.asset(
                       'assets/images/yeni_hesap_text.png',
                       width: 180,
@@ -55,7 +57,9 @@ class Screen1 extends StatelessWidget {
                 ),
                 RegisterElevatedButton(
                     color: Colors.transparent.withOpacity(0),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, '/login');
+                    },
                     child: const Text(
                       'Giriş Yap',
                       style: TextStyle(fontFamily: 'Roboto', fontSize: 18),
@@ -67,7 +71,7 @@ class Screen1 extends StatelessWidget {
                   children: [
                     Expanded(
                         child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(16.0),
                       child: kvkkRichText(Colors.white),
                     )),
                   ],
