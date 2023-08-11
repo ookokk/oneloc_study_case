@@ -4,6 +4,8 @@ import 'package:oneloc_study_case/src/widgets/custom_text_form_field.dart';
 import 'package:oneloc_study_case/src/widgets/kvkk_rich_text.dart';
 import 'package:oneloc_study_case/src/widgets/register_elevated_button.dart';
 
+import '../../service/auth_service.dart';
+
 class RegisterPage extends StatelessWidget {
   RegisterPage({Key? key}) : super(key: key);
   final TextEditingController usernameController = TextEditingController();
@@ -36,12 +38,16 @@ class RegisterPage extends StatelessWidget {
                   height: 28,
                 ),
                 CustomTextFormField(
-                    hintText: 'Kullanıcı adı', controller: usernameController),
+                    obscureText: false,
+                    hintText: 'Kullanıcı adı',
+                    controller: usernameController),
                 const SizedBox(
                   height: 18,
                 ),
                 CustomTextFormField(
-                    hintText: 'E-posta adresi', controller: emailController),
+                    obscureText: false,
+                    hintText: 'E-posta adresi',
+                    controller: emailController),
                 const SizedBox(
                   height: 18,
                 ),
@@ -50,6 +56,7 @@ class RegisterPage extends StatelessWidget {
                   height: 18,
                 ),
                 CustomTextFormField(
+                  obscureText: true,
                   hintText: 'Şifre',
                   controller: passwordController,
                 ),
@@ -57,12 +64,28 @@ class RegisterPage extends StatelessWidget {
                   height: 24,
                 ),
                 RegisterElevatedButton(
-                    color: const Color(0xFF0076FF),
-                    onTap: () {},
-                    child: const Text(
-                      'Hesabı oluştur',
-                      style: TextStyle(fontSize: 22),
-                    )),
+                  color: const Color(0xFF0076FF),
+                  onTap: () async {
+                    final username = usernameController.text.trim();
+                    final email = emailController.text.trim();
+                    final phoneNumber = phoneNumberController.text;
+                    final password = passwordController.text.trim();
+
+                    final authService = AuthService();
+                    final success = await authService.register(
+                        username, email, phoneNumber, password);
+
+                    if (success) {
+                      print('kullanici basariyla olusturuldu');
+                    } else {
+                      print('hata kullanici olusturulamadi');
+                    }
+                  },
+                  child: const Text(
+                    'Hesabı oluştur',
+                    style: TextStyle(fontSize: 22),
+                  ),
+                ),
                 const SizedBox(
                   height: 18,
                 ),
@@ -135,8 +158,10 @@ class RegisterPage extends StatelessWidget {
         ),
         SizedBox(
           width: kWidth * 0.65 - 8,
-          child: const CustomTextFormField(
+          child: CustomTextFormField(
+            obscureText: false,
             hintText: 'Telefon Numarası',
+            controller: phoneNumberController,
           ),
         ),
         // Diğer widget'lar
@@ -151,7 +176,7 @@ class RegisterPage extends StatelessWidget {
                 fontSize: 28,
                 color: Colors.black,
                 fontFamily: 'Roboto',
-                fontWeight: FontWeight.w300),
+                fontWeight: FontWeight.w400),
             children: <TextSpan>[
           TextSpan(text: 'Hemen yeni bir hesap oluştur ve en iyi '),
           TextSpan(

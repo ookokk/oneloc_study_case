@@ -3,6 +3,7 @@ import 'package:oneloc_study_case/src/widgets/custom_app_bar.dart';
 import 'package:oneloc_study_case/src/widgets/custom_text_form_field.dart';
 import 'package:oneloc_study_case/src/widgets/register_elevated_button.dart';
 
+import '../../service/auth_service.dart';
 import '../../widgets/kvkk_rich_text.dart';
 
 class LoginPage extends StatelessWidget {
@@ -26,6 +27,7 @@ class LoginPage extends StatelessWidget {
                 height: 50,
               ),
               CustomTextFormField(
+                obscureText: false,
                 hintText: 'E-posta adresi',
                 controller: emailController,
               ),
@@ -33,43 +35,47 @@ class LoginPage extends StatelessWidget {
                 height: 28,
               ),
               CustomTextFormField(
+                obscureText: true,
                 hintText: 'Şifre',
                 controller: passwordController,
               ),
               const SizedBox(
                 height: 34,
               ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    'Şifremi Unuttum',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 18,
-                  )
-                ],
-              ),
+              buildForgotPasswordRow(),
               const SizedBox(
                 height: 34,
               ),
               RegisterElevatedButton(
-                  color: const Color(0xFF0076FF),
-                  onTap: () {},
-                  child: const Text(
-                    'Giriş Yap',
-                    style: TextStyle(
-                      fontSize: 24,
-                    ),
-                  )),
+                color: const Color(0xFF0076FF),
+                onTap: () async {
+                  final authService = AuthService();
+                  final email = emailController.text;
+                  final password = passwordController.text;
+
+                  final success = await authService.login(email, password);
+
+                  if (success) {
+                    print('kullanici girisi basarili');
+                  } else {
+                    print('kullanici girisi hatali');
+                  }
+                },
+                child: const Text(
+                  'Giriş Yap',
+                  style: TextStyle(
+                    fontSize: 24,
+                  ),
+                ),
+              ),
               const SizedBox(
                 height: 34,
               ),
               RegisterElevatedButton(
                   color: Colors.white,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, '/login');
+                  },
                   child: const Text(
                     'Yeni hesap oluştur',
                     style: TextStyle(fontSize: 22, color: Colors.black),
@@ -97,6 +103,22 @@ class LoginPage extends StatelessWidget {
         text: 'Giriş Yap',
       ),
     ));
+  }
+
+  Row buildForgotPasswordRow() {
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Text(
+          'Şifremi Unuttum',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        ),
+        Icon(
+          Icons.arrow_forward_ios,
+          size: 18,
+        )
+      ],
+    );
   }
 
   RichText buildHosgeldinRichText() {

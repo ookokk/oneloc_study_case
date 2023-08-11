@@ -15,13 +15,10 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    // 2 saniye sonra Screen1 sayfasına yönlendirme yapılacak
     Future.delayed(Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-            builder: (context) =>
-                const Screen1()), // Yönlendirme yapılacak sayfa
+        MaterialPageRoute(builder: (context) => const Screen1()),
       );
     });
   }

@@ -2,9 +2,12 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class AuthService {
+  final String baseUrl = "https://case.onelocapp.com";
+
   Future<bool> login(String email, String password) async {
     final response = await http.post(
-      Uri.parse('http://your-backend-url/login'),
+      Uri.parse(
+          '$baseUrl/api/auth/login'), // baseUrl kullanarak URL oluşturuldu
       body: jsonEncode({
         'email': email,
         'password': password,
@@ -25,11 +28,14 @@ class AuthService {
     }
   }
 
-  Future<bool> register(String email, String password) async {
+  Future<bool> register(String username, String email, String phoneNumber,
+      String password) async {
     final response = await http.post(
-      Uri.parse('http://your-backend-url/register'),
+      Uri.parse('$baseUrl/api/auth/register'),
       body: jsonEncode({
+        'username': username,
         'email': email,
+        'phoneNumber': phoneNumber,
         'password': password,
       }),
       headers: {'Content-Type': 'application/json'},
