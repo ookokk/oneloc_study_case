@@ -6,10 +6,18 @@ import 'package:oneloc_study_case/src/widgets/register_elevated_button.dart';
 import '../../service/auth_service.dart';
 import '../../widgets/kvkk_rich_text.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  String _errorMessage = '';
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -46,28 +54,7 @@ class LoginPage extends StatelessWidget {
               const SizedBox(
                 height: 34,
               ),
-              RegisterElevatedButton(
-                color: const Color(0xFF0076FF),
-                onTap: () async {
-                  final authService = AuthService();
-                  final email = emailController.text;
-                  final password = passwordController.text;
-
-                  final success = await authService.login(email, password);
-
-                  if (success) {
-                    print('kullanici girisi basarili');
-                  } else {
-                    print('kullanici girisi hatali');
-                  }
-                },
-                child: const Text(
-                  'Giriş Yap',
-                  style: TextStyle(
-                    fontSize: 24,
-                  ),
-                ),
-              ),
+              buildSignInRegisterElevatedButton(context),
               const SizedBox(
                 height: 34,
               ),
@@ -103,6 +90,52 @@ class LoginPage extends StatelessWidget {
         text: 'Giriş Yap',
       ),
     ));
+  }
+
+  RegisterElevatedButton buildSignInRegisterElevatedButton(
+      BuildContext context) {
+    return RegisterElevatedButton(
+      color: const Color(0xFF0076FF),
+      onTap: () async {
+        final authService = AuthService();
+        final email = emailController.text;
+        final password = passwordController.text;
+
+        final success = await authService.login(email, password);
+
+        if (success) {
+          print('kullanici girisi basarili');
+        } else {
+          setState(() {
+            _errorMessage = 'Kullanıcı girişi hatalı';
+          });
+
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Hata'),
+                content: Text(_errorMessage),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('Tamam'),
+                  ),
+                ],
+              );
+            },
+          );
+        }
+      },
+      child: const Text(
+        'Giriş Yap',
+        style: TextStyle(
+          fontSize: 24,
+        ),
+      ),
+    );
   }
 
   Row buildForgotPasswordRow() {
