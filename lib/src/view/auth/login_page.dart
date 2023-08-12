@@ -1,8 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
 import 'package:flutter/material.dart';
 import 'package:oneloc_study_case/src/widgets/custom_app_bar.dart';
 import 'package:oneloc_study_case/src/widgets/custom_text_form_field.dart';
 import 'package:oneloc_study_case/src/widgets/register_elevated_button.dart';
-
 import '../../service/auth_service.dart';
 import '../../widgets/kvkk_rich_text.dart';
 
@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
               RegisterElevatedButton(
                   color: Colors.white,
                   onTap: () {
-                    Navigator.pushNamed(context, '/login');
+                    Navigator.pushNamed(context, '/register');
                   },
                   child: const Text(
                     'Yeni hesap oluştur',
@@ -114,14 +114,14 @@ class _LoginPageState extends State<LoginPage> {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: Text('Hata'),
+                title: const Text('Hata'),
                 content: Text(_errorMessage),
                 actions: [
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text('Tamam'),
+                    child: const Text('Tamam'),
                   ),
                 ],
               );

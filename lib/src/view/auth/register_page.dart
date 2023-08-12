@@ -6,12 +6,23 @@ import 'package:oneloc_study_case/src/widgets/register_elevated_button.dart';
 
 import '../../service/auth_service.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   RegisterPage({Key? key}) : super(key: key);
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
+  bool isLoginSuccessful = false;
+  bool isContinueButtonVisible = false;
+  double continueButtonWidth = 200.0;
+  Color continueButtonColor = Colors.white;
+  String continueButtonText = 'Giriş Yap';
 
   @override
   Widget build(BuildContext context) {
@@ -38,16 +49,18 @@ class RegisterPage extends StatelessWidget {
                   height: 28,
                 ),
                 CustomTextFormField(
-                    obscureText: false,
-                    hintText: 'Kullanıcı adı',
-                    controller: usernameController),
+                  obscureText: false,
+                  hintText: 'Kullanıcı adı',
+                  controller: usernameController,
+                ),
                 const SizedBox(
                   height: 18,
                 ),
                 CustomTextFormField(
-                    obscureText: false,
-                    hintText: 'E-posta adresi',
-                    controller: emailController),
+                  obscureText: false,
+                  hintText: 'E-posta adresi',
+                  controller: emailController,
+                ),
                 const SizedBox(
                   height: 18,
                 ),
@@ -73,9 +86,19 @@ class RegisterPage extends StatelessWidget {
 
                     final authService = AuthService();
                     final success = await authService.register(
-                        username, email, phoneNumber, password);
-
+                      username,
+                      email,
+                      phoneNumber,
+                      password,
+                    );
                     if (success) {
+                      setState(() {
+                        isLoginSuccessful = true;
+                        isContinueButtonVisible = true;
+                        continueButtonWidth = 250;
+                        continueButtonColor = Colors.green;
+                        continueButtonText = 'Devam et ve tamamla';
+                      });
                       print('kullanici basariyla olusturuldu');
                     } else {
                       print('hata kullanici olusturulamadi');
@@ -89,25 +112,42 @@ class RegisterPage extends StatelessWidget {
                 const SizedBox(
                   height: 18,
                 ),
-                RegisterElevatedButton(
-                    color: Colors.white,
-                    onTap: () {},
-                    child: const Text(
-                      'Giriş Yap',
-                      style: TextStyle(fontSize: 24, color: Colors.black),
-                    )),
+                isLoginSuccessful
+                    ? SizedBox(
+                        height: 70,
+                        child: RegisterElevatedButton(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/state');
+                          },
+                          color: const Color(0xFF00B2A4),
+                          child: Text(
+                            continueButtonText,
+                            style: const TextStyle(fontSize: 22),
+                          ),
+                        ),
+                      )
+                    : RegisterElevatedButton(
+                        color: Colors.white,
+                        onTap: () {
+                          Navigator.pushNamed(context, '/login');
+                        },
+                        child: const Text(
+                          'Giriş Yap',
+                          style: TextStyle(fontSize: 24, color: Colors.black),
+                        )),
                 const SizedBox(
                   height: 28,
                 ),
                 Row(
                   children: [
                     Expanded(
-                        child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: kvkkRichText(Colors.black),
-                    )),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: kvkkRichText(Colors.black),
+                      ),
+                    ),
                   ],
-                )
+                ),
               ],
             ),
           ),
@@ -152,7 +192,6 @@ class RegisterPage extends StatelessWidget {
             ),
           ),
         ),
-
         const SizedBox(
           width: 8,
         ),
@@ -164,24 +203,27 @@ class RegisterPage extends StatelessWidget {
             controller: phoneNumberController,
           ),
         ),
-        // Diğer widget'lar
       ],
     );
   }
 
   RichText buildHemenYeniBirRichText() {
     return RichText(
-        text: const TextSpan(
-            style: TextStyle(
-                fontSize: 28,
-                color: Colors.black,
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w400),
-            children: <TextSpan>[
+      text: const TextSpan(
+        style: TextStyle(
+          fontSize: 28,
+          color: Colors.black,
+          fontFamily: 'Roboto',
+          fontWeight: FontWeight.w400,
+        ),
+        children: <TextSpan>[
           TextSpan(text: 'Hemen yeni bir hesap oluştur ve en iyi '),
           TextSpan(
-              text: 'deneyimi yaşa!',
-              style: TextStyle(fontWeight: FontWeight.bold))
-        ]));
+            text: 'deneyimi yaşa!',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
   }
 }
