@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 
-RichText kvkkRichText(BuildContext context) {
-  final textColor = Theme.of(context).brightness == Brightness.dark
-      ? Colors.white
-      : Colors.black;
+RichText screen1KvkkRichText() {
+  const textColor = Colors.white;
 
   return RichText(
-    text: TextSpan(
+    text: const TextSpan(
       style: TextStyle(
         fontSize: 17,
         color: textColor,
         fontFamily: 'Roboto',
         fontWeight: FontWeight.w300,
       ),
-      children: const <TextSpan>[
+      children: <TextSpan>[
         TextSpan(
             text: 'Oneloc’un mobil uygulamasına giriş yapan kullanıcılar '),
         TextSpan(

@@ -15,13 +15,11 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkTheme = Theme.of(context).brightness == Brightness.dark;
-
     return TextFormField(
       obscureText: obscureText,
       controller: controller,
       style: TextStyle(
         color: isDarkTheme ? Colors.white : Colors.black,
-        // Diğer stil özellikleri
       ),
       decoration: InputDecoration(
         hintText: hintText,

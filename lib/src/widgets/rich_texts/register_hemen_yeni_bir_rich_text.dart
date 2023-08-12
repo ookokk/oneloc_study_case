@@ -6,8 +6,8 @@ RichText registerHemenYeniBirRichText(BuildContext context) {
       style: TextStyle(
         fontSize: 28,
         color: Theme.of(context).brightness == Brightness.dark
-            ? Colors.white // Koyu tema için metin rengi
-            : Colors.black, // Diğer durumlar için metin rengi
+            ? Colors.white
+            : Colors.black,
         fontFamily: 'Roboto',
         fontWeight: FontWeight.w400,
       ),

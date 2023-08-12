@@ -4,7 +4,6 @@ import 'package:oneloc_study_case/src/widgets/custom_app_bar.dart';
 import 'package:oneloc_study_case/src/widgets/custom_text_form_field.dart';
 import 'package:oneloc_study_case/src/widgets/rich_texts/kvkk_rich_text.dart';
 import 'package:oneloc_study_case/src/widgets/register_elevated_button.dart';
-
 import '../../service/auth_service.dart';
 import '../../widgets/rich_texts/register_hemen_yeni_bir_rich_text.dart';
 
