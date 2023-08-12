@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oneloc_study_case/src/widgets/custom_app_bar.dart';
 import 'package:oneloc_study_case/src/widgets/custom_text_form_field.dart';
-import 'package:oneloc_study_case/src/widgets/kvkk_rich_text.dart';
+import 'package:oneloc_study_case/src/widgets/rich_texts/kvkk_rich_text.dart';
 import 'package:oneloc_study_case/src/widgets/register_elevated_button.dart';
 
 import '../../service/auth_service.dart';
@@ -143,7 +143,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: kvkkRichText(Colors.black),
+                        child: kvkkRichText(context),
                       ),
                     ),
                   ],
@@ -163,34 +163,41 @@ class _RegisterPageState extends State<RegisterPage> {
           width: kWidth * 0.3,
           height: kHeight * 0.075,
           child: Container(
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(
-                      'assets/images/flag.png',
-                      fit: BoxFit.contain,
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: Container(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Color(0xFF525252)
+                    : Colors.grey[200],
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset(
+                          'assets/images/flag.png',
+                          fit: BoxFit.contain,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                const Expanded(
-                  child: Text(
-                    '+90',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w500,
+                    Expanded(
+                      child: Text(
+                        '+90',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w500,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-          ),
+              )),
         ),
         const SizedBox(
           width: 8,
@@ -209,10 +216,12 @@ class _RegisterPageState extends State<RegisterPage> {
 
   RichText buildHemenYeniBirRichText() {
     return RichText(
-      text: const TextSpan(
+      text: TextSpan(
         style: TextStyle(
           fontSize: 28,
-          color: Colors.black,
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Colors.white // Koyu tema için metin rengi
+              : Colors.black, // Diğer durumlar için metin rengi
           fontFamily: 'Roboto',
           fontWeight: FontWeight.w400,
         ),

@@ -11,18 +11,28 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      elevation: 1,
-      backgroundColor: Colors.white,
-      title: Row(
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      title: Column(
         children: [
-          Expanded(
-              child: Center(
-                  child: Text(text,
-                      style: const TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.w600)))),
-          const SizedBox(
-            width: 50,
-          )
+          Row(
+            children: [
+              Expanded(
+                  child: Center(
+                      child: Text(text,
+                          style: TextStyle(
+                            fontSize: 24,
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                    ? Colors.black
+                                    : Colors.white,
+                            fontWeight: FontWeight.w600,
+                          )))),
+              const SizedBox(
+                width: 50,
+              )
+            ],
+          ),
         ],
       ),
       leading: IconButton(

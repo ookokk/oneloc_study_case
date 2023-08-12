@@ -60,27 +60,33 @@ class StatePage extends StatelessWidget {
                 height: 20,
               ),
               RegisterElevatedButton(
-                  color: Colors.transparent,
-                  onTap: () {},
-                  child: const Text(
-                    'Vazgeçtim,bilgilerimi tamamen sil',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 22,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.bold),
-                  ))
+                color: Colors.transparent,
+                onTap: () {},
+                child: Text(
+                  'Vazgeçtim, bilgilerimi tamamen sil',
+                  style: TextStyle(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : Colors.black,
+                    fontSize: 22,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
       ),
       appBar: AppBar(
         elevation: 2,
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).brightness == Brightness.dark
+            ? Color(0xFF525252)
+            : Colors.white,
         title: Center(
           child: Image.asset(
             'assets/images/oneloc_icon_appBar.png',
-            height: 40,
+            height: 45,
           ),
         ),
       ),

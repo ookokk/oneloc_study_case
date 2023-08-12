@@ -4,7 +4,8 @@ import 'package:oneloc_study_case/src/widgets/custom_app_bar.dart';
 import 'package:oneloc_study_case/src/widgets/custom_text_form_field.dart';
 import 'package:oneloc_study_case/src/widgets/register_elevated_button.dart';
 import '../../service/auth_service.dart';
-import '../../widgets/kvkk_rich_text.dart';
+import '../../widgets/rich_texts/hosgeldin_rich_text.dart';
+import '../../widgets/rich_texts/kvkk_rich_text.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -30,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 50,
               ),
-              buildHosgeldinRichText(),
+              hosgeldinRichText(context),
               const SizedBox(
                 height: 50,
               ),
@@ -59,14 +60,22 @@ class _LoginPageState extends State<LoginPage> {
                 height: 34,
               ),
               RegisterElevatedButton(
-                  color: Colors.white,
-                  onTap: () {
-                    Navigator.pushNamed(context, '/register');
-                  },
-                  child: const Text(
-                    'Yeni hesap oluştur',
-                    style: TextStyle(fontSize: 22, color: Colors.black),
-                  )),
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Color(0xFF525252) // Dark Theme Color
+                    : Colors.white, // Light Theme Color
+                onTap: () {
+                  Navigator.pushNamed(context, '/register');
+                },
+                child: Text(
+                  'Yeni hesap oluştur',
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white // Dark Theme Text Color
+                        : Colors.black, // Light Theme Text Color
+                  ),
+                ),
+              ),
               const SizedBox(
                 height: 50,
               ),
@@ -75,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                   Expanded(
                       child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: kvkkRichText(Colors.black),
+                    child: kvkkRichText(context),
                   )),
                 ],
               )
@@ -100,11 +109,10 @@ class _LoginPageState extends State<LoginPage> {
         final authService = AuthService();
         final email = emailController.text;
         final password = passwordController.text;
-
         final success = await authService.login(email, password);
-
         if (success) {
           print('kullanici girisi basarili');
+          Navigator.pushNamed(context, '/state');
         } else {
           setState(() {
             _errorMessage = 'Kullanıcı girişi hatalı';
@@ -151,26 +159,6 @@ class _LoginPageState extends State<LoginPage> {
           size: 18,
         )
       ],
-    );
-  }
-
-  RichText buildHosgeldinRichText() {
-    return RichText(
-      text: const TextSpan(
-        style: TextStyle(
-          fontSize: 28,
-          color: Colors.black,
-          fontFamily: 'Roboto',
-          fontWeight: FontWeight.w400,
-        ),
-        children: <TextSpan>[
-          TextSpan(text: 'En iyi deneyimlerin merkezi Oneloc’a '),
-          TextSpan(
-            text: 'hoş geldin!',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ],
-      ),
     );
   }
 }

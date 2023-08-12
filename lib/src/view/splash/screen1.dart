@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oneloc_study_case/src/widgets/register_elevated_button.dart';
 
-import '../../widgets/kvkk_rich_text.dart';
+import '../../widgets/rich_texts/kvkk_rich_text.dart';
 
 class Screen1 extends StatelessWidget {
   const Screen1({Key? key}) : super(key: key);
@@ -72,7 +72,7 @@ class Screen1 extends StatelessWidget {
                     Expanded(
                         child: Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: kvkkRichText(Colors.white),
+                      child: kvkkRichText(context),
                     )),
                   ],
                 )
