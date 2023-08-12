@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:flutter/material.dart';
+import 'package:oneloc_study_case/src/constants/my_app_strings.dart';
 import 'package:oneloc_study_case/src/widgets/custom_app_bar.dart';
 import 'package:oneloc_study_case/src/widgets/custom_text_form_field.dart';
 import 'package:oneloc_study_case/src/widgets/register_elevated_button.dart';
@@ -8,7 +9,7 @@ import '../../widgets/rich_texts/hosgeldin_rich_text.dart';
 import '../../widgets/rich_texts/kvkk_rich_text.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key? key}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -37,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               CustomTextFormField(
                 obscureText: false,
-                hintText: 'E-posta adresi',
+                hintText: MyAppStrings.registerPhoneNumber,
                 controller: emailController,
               ),
               const SizedBox(
@@ -45,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               CustomTextFormField(
                 obscureText: true,
-                hintText: 'Şifre',
+                hintText: MyAppStrings.loginCreateNewAccount,
                 controller: passwordController,
               ),
               const SizedBox(
@@ -59,23 +60,7 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 34,
               ),
-              RegisterElevatedButton(
-                color: Theme.of(context).brightness == Brightness.dark
-                    ? Color(0xFF525252) // Dark Theme Color
-                    : Colors.white, // Light Theme Color
-                onTap: () {
-                  Navigator.pushNamed(context, '/register');
-                },
-                child: Text(
-                  'Yeni hesap oluştur',
-                  style: TextStyle(
-                    fontSize: 22,
-                    color: Theme.of(context).brightness == Brightness.dark
-                        ? Colors.white // Dark Theme Text Color
-                        : Colors.black, // Light Theme Text Color
-                  ),
-                ),
-              ),
+              buildYeniHesapRegisterElevatedButton(context),
               const SizedBox(
                 height: 50,
               ),
@@ -96,9 +81,30 @@ class _LoginPageState extends State<LoginPage> {
         onPressed: () {
           Navigator.pop(context);
         },
-        text: 'Giriş Yap',
+        text: MyAppStrings.screen1Login,
       ),
     ));
+  }
+
+  RegisterElevatedButton buildYeniHesapRegisterElevatedButton(
+      BuildContext context) {
+    return RegisterElevatedButton(
+      color: Theme.of(context).brightness == Brightness.dark
+          ? const Color(0xFF525252) // Dark Theme Color
+          : Colors.white, // Light Theme Color
+      onTap: () {
+        Navigator.pushNamed(context, '/register');
+      },
+      child: Text(
+        MyAppStrings.loginCreateNewAccount,
+        style: TextStyle(
+          fontSize: 22,
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Colors.white
+              : Colors.black,
+        ),
+      ),
+    );
   }
 
   RegisterElevatedButton buildSignInRegisterElevatedButton(
@@ -122,14 +128,14 @@ class _LoginPageState extends State<LoginPage> {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: const Text('Hata'),
+                title: const Text(MyAppStrings.loginErrorTitle),
                 content: Text(_errorMessage),
                 actions: [
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: const Text('Tamam'),
+                    child: const Text(MyAppStrings.loginErrorOkay),
                   ),
                 ],
               );
@@ -138,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
         }
       },
       child: const Text(
-        'Giriş Yap',
+        MyAppStrings.screen1Login,
         style: TextStyle(
           fontSize: 24,
         ),
@@ -151,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Text(
-          'Şifremi Unuttum',
+          MyAppStrings.loginForgotPassword,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
         Icon(

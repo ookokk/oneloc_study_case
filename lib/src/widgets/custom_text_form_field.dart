@@ -29,10 +29,10 @@ class CustomTextFormField extends StatelessWidget {
           fontSize: 18,
           fontFamily: 'Roboto',
           fontWeight: FontWeight.w500,
-          color: isDarkTheme ? Colors.white : Color(0xFF525252),
+          color: isDarkTheme ? Colors.white : const Color(0xFF525252),
         ),
         filled: true,
-        fillColor: isDarkTheme ? Color(0xFF525252) : Colors.grey[200],
+        fillColor: isDarkTheme ? const Color(0xFF525252) : Colors.grey[200],
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
           borderSide: BorderSide.none,

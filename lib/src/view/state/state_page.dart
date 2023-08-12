@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oneloc_study_case/src/constants/my_app_strings.dart';
 import 'package:oneloc_study_case/src/widgets/register_elevated_button.dart';
 
 class StatePage extends StatelessWidget {
@@ -25,7 +26,7 @@ class StatePage extends StatelessWidget {
                 height: 40,
               ),
               const Text(
-                'Bilgilerin inceleniyor',
+                MyAppStrings.stateYourInformation,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 28,
@@ -35,8 +36,7 @@ class StatePage extends StatelessWidget {
                 height: 10,
               ),
               const Text(
-                'Oneloc ekibi vermiş olduğun bilgileri inceliyor. '
-                'Onaylandıktan sonra bir bildirim alacaksın ve hesabını kullanmaya başlatabileceksin.',
+                MyAppStrings.stateYourInfoNotification,
                 style: TextStyle(
                     fontFamily: 'Roboto',
                     fontSize: 18,
@@ -50,7 +50,7 @@ class StatePage extends StatelessWidget {
                   color: const Color(0xFFFD0000),
                   onTap: () {},
                   child: const Text(
-                    'Çıkış yap',
+                    MyAppStrings.stateLogOut,
                     style: TextStyle(
                         fontSize: 22,
                         fontFamily: 'Roboto',
@@ -63,7 +63,7 @@ class StatePage extends StatelessWidget {
                 color: Colors.transparent,
                 onTap: () {},
                 child: Text(
-                  'Vazgeçtim, bilgilerimi tamamen sil',
+                  MyAppStrings.stateDeleteMyInformation,
                   style: TextStyle(
                     color: Theme.of(context).brightness == Brightness.dark
                         ? Colors.white
@@ -81,7 +81,7 @@ class StatePage extends StatelessWidget {
       appBar: AppBar(
         elevation: 2,
         backgroundColor: Theme.of(context).brightness == Brightness.dark
-            ? Color(0xFF525252)
+            ? const Color(0xFF525252)
             : Colors.white,
         title: Center(
           child: Image.asset(

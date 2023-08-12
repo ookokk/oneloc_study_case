@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:oneloc_study_case/src/constants/my_app_strings.dart';
 import 'package:oneloc_study_case/src/widgets/custom_app_bar.dart';
 import 'package:oneloc_study_case/src/widgets/custom_text_form_field.dart';
 import 'package:oneloc_study_case/src/widgets/rich_texts/kvkk_rich_text.dart';
 import 'package:oneloc_study_case/src/widgets/register_elevated_button.dart';
 
 import '../../service/auth_service.dart';
+import '../../widgets/rich_texts/register_hemen_yeni_bir_rich_text.dart';
 
 class RegisterPage extends StatefulWidget {
-  RegisterPage({Key? key}) : super(key: key);
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -31,7 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return SafeArea(
       child: Scaffold(
         appBar: CustomAppBar(
-          text: 'Yeni hesap oluştur',
+          text: MyAppStrings.loginCreateNewAccount,
           onPressed: () {
             Navigator.pop(context);
           },
@@ -44,13 +46,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(
                   height: 18,
                 ),
-                buildHemenYeniBirRichText(),
+                registerHemenYeniBirRichText(context),
                 const SizedBox(
                   height: 28,
                 ),
                 CustomTextFormField(
                   obscureText: false,
-                  hintText: 'Kullanıcı adı',
+                  hintText: MyAppStrings.registerPhoneNumber,
                   controller: usernameController,
                 ),
                 const SizedBox(
@@ -58,7 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 CustomTextFormField(
                   obscureText: false,
-                  hintText: 'E-posta adresi',
+                  hintText: MyAppStrings.loginEmail,
                   controller: emailController,
                 ),
                 const SizedBox(
@@ -70,45 +72,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 CustomTextFormField(
                   obscureText: true,
-                  hintText: 'Şifre',
+                  hintText: MyAppStrings.loginPassword,
                   controller: passwordController,
                 ),
                 const SizedBox(
                   height: 24,
                 ),
-                RegisterElevatedButton(
-                  color: const Color(0xFF0076FF),
-                  onTap: () async {
-                    final username = usernameController.text.trim();
-                    final email = emailController.text.trim();
-                    final phoneNumber = phoneNumberController.text;
-                    final password = passwordController.text.trim();
-
-                    final authService = AuthService();
-                    final success = await authService.register(
-                      username,
-                      email,
-                      phoneNumber,
-                      password,
-                    );
-                    if (success) {
-                      setState(() {
-                        isLoginSuccessful = true;
-                        isContinueButtonVisible = true;
-                        continueButtonWidth = 250;
-                        continueButtonColor = Colors.green;
-                        continueButtonText = 'Devam et ve tamamla';
-                      });
-                      print('kullanici basariyla olusturuldu');
-                    } else {
-                      print('hata kullanici olusturulamadi');
-                    }
-                  },
-                  child: const Text(
-                    'Hesabı oluştur',
-                    style: TextStyle(fontSize: 22),
-                  ),
-                ),
+                buildRRegisterElevatedButton(),
                 const SizedBox(
                   height: 18,
                 ),
@@ -132,7 +102,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           Navigator.pushNamed(context, '/login');
                         },
                         child: const Text(
-                          'Giriş Yap',
+                          MyAppStrings.screen1Login,
                           style: TextStyle(fontSize: 24, color: Colors.black),
                         )),
                 const SizedBox(
@@ -156,6 +126,42 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
+  RegisterElevatedButton buildRRegisterElevatedButton() {
+    return RegisterElevatedButton(
+      color: const Color(0xFF0076FF),
+      onTap: () async {
+        final username = usernameController.text.trim();
+        final email = emailController.text.trim();
+        final phoneNumber = phoneNumberController.text;
+        final password = passwordController.text.trim();
+
+        final authService = AuthService();
+        final success = await authService.register(
+          username,
+          email,
+          phoneNumber,
+          password,
+        );
+        if (success) {
+          setState(() {
+            isLoginSuccessful = true;
+            isContinueButtonVisible = true;
+            continueButtonWidth = 250;
+            continueButtonColor = Colors.green;
+            continueButtonText = 'Devam et ve tamamla';
+          });
+          print('kullanici basariyla olusturuldu');
+        } else {
+          print('hata kullanici olusturulamadi');
+        }
+      },
+      child: const Text(
+        MyAppStrings.registerPhoneNumber,
+        style: TextStyle(fontSize: 22),
+      ),
+    );
+  }
+
   Row buildPhoneNumberRow(double kWidth, double kHeight) {
     return Row(
       children: [
@@ -169,7 +175,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               child: Container(
                 color: Theme.of(context).brightness == Brightness.dark
-                    ? Color(0xFF525252)
+                    ? const Color(0xFF525252)
                     : Colors.grey[200],
                 child: Row(
                   children: [
@@ -184,7 +190,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     Expanded(
                       child: Text(
-                        '+90',
+                        MyAppStrings.registerPhoneNumber,
                         style: TextStyle(
                             fontSize: 18,
                             fontFamily: 'Roboto',
@@ -206,33 +212,11 @@ class _RegisterPageState extends State<RegisterPage> {
           width: kWidth * 0.65 - 8,
           child: CustomTextFormField(
             obscureText: false,
-            hintText: 'Telefon Numarası',
+            hintText: MyAppStrings.registerPhoneNumber,
             controller: phoneNumberController,
           ),
         ),
       ],
-    );
-  }
-
-  RichText buildHemenYeniBirRichText() {
-    return RichText(
-      text: TextSpan(
-        style: TextStyle(
-          fontSize: 28,
-          color: Theme.of(context).brightness == Brightness.dark
-              ? Colors.white // Koyu tema için metin rengi
-              : Colors.black, // Diğer durumlar için metin rengi
-          fontFamily: 'Roboto',
-          fontWeight: FontWeight.w400,
-        ),
-        children: <TextSpan>[
-          TextSpan(text: 'Hemen yeni bir hesap oluştur ve en iyi '),
-          TextSpan(
-            text: 'deneyimi yaşa!',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ],
-      ),
     );
   }
 }

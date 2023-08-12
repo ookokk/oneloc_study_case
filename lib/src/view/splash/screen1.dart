@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oneloc_study_case/src/constants/my_app_strings.dart';
 import 'package:oneloc_study_case/src/widgets/register_elevated_button.dart';
 
 import '../../widgets/rich_texts/kvkk_rich_text.dart';
@@ -61,7 +62,7 @@ class Screen1 extends StatelessWidget {
                       Navigator.pushNamed(context, '/login');
                     },
                     child: const Text(
-                      'Giriş Yap',
+                      MyAppStrings.screen1Login,
                       style: TextStyle(fontFamily: 'Roboto', fontSize: 18),
                     )),
                 const SizedBox(
