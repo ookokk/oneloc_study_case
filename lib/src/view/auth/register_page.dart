@@ -1,9 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:oneloc_study_case/src/constants/my_app_strings.dart';
 import 'package:oneloc_study_case/src/widgets/custom_app_bar.dart';
 import 'package:oneloc_study_case/src/widgets/custom_text_form_field.dart';
 import 'package:oneloc_study_case/src/widgets/rich_texts/kvkk_rich_text.dart';
-import 'package:oneloc_study_case/src/widgets/register_elevated_button.dart';
+import 'package:oneloc_study_case/src/widgets/custom_elevated_button.dart';
 import '../../service/auth_service.dart';
 import '../../widgets/rich_texts/register_hemen_yeni_bir_rich_text.dart';
 
@@ -24,6 +26,7 @@ class _RegisterPageState extends State<RegisterPage> {
   double continueButtonWidth = 200.0;
   Color continueButtonColor = Colors.white;
   String continueButtonText = 'Giriş Yap';
+  String _errorMessage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +54,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 CustomTextFormField(
                   obscureText: false,
-                  hintText: MyAppStrings.registerPhoneNumber,
+                  hintText: MyAppStrings.registerUsername,
                   controller: usernameController,
                 ),
                 const SizedBox(
@@ -77,14 +80,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(
                   height: 24,
                 ),
-                buildRRegisterElevatedButton(),
+                buildHesabiOlusturRegisterElevatedButton(),
                 const SizedBox(
                   height: 18,
                 ),
                 isLoginSuccessful
                     ? SizedBox(
                         height: 70,
-                        child: RegisterElevatedButton(
+                        child: CustomElevatedButton(
                           onTap: () {
                             Navigator.pushNamed(context, '/state');
                           },
@@ -95,14 +98,22 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                       )
-                    : RegisterElevatedButton(
-                        color: Colors.white,
+                    : CustomElevatedButton(
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.transparent
+                            : Colors.white,
                         onTap: () {
                           Navigator.pushNamed(context, '/login');
                         },
-                        child: const Text(
+                        child: Text(
                           MyAppStrings.screen1Login,
-                          style: TextStyle(fontSize: 24, color: Colors.black),
+                          style: TextStyle(
+                            fontSize: 24,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
+                          ),
                         )),
                 const SizedBox(
                   height: 28,
@@ -125,8 +136,8 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  RegisterElevatedButton buildRRegisterElevatedButton() {
-    return RegisterElevatedButton(
+  CustomElevatedButton buildHesabiOlusturRegisterElevatedButton() {
+    return CustomElevatedButton(
       color: const Color(0xFF0076FF),
       onTap: () async {
         final username = usernameController.text.trim();
@@ -141,6 +152,7 @@ class _RegisterPageState extends State<RegisterPage> {
           phoneNumber,
           password,
         );
+
         if (success) {
           setState(() {
             isLoginSuccessful = true;
@@ -151,11 +163,30 @@ class _RegisterPageState extends State<RegisterPage> {
           });
           print('kullanici basariyla olusturuldu');
         } else {
-          print('hata kullanici olusturulamadi');
+          setState(() {
+            _errorMessage = authService.responseMessage;
+          });
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text('Hata'),
+                content: Text(_errorMessage),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Tamam'),
+                  ),
+                ],
+              );
+            },
+          );
         }
       },
       child: const Text(
-        MyAppStrings.registerPhoneNumber,
+        MyAppStrings.registerCreateThisAccount,
         style: TextStyle(fontSize: 22),
       ),
     );
@@ -189,7 +220,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     Expanded(
                       child: Text(
-                        MyAppStrings.registerPhoneNumber,
+                        MyAppStrings.registerTRCountryCode,
                         style: TextStyle(
                             fontSize: 18,
                             fontFamily: 'Roboto',

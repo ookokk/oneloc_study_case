@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oneloc_study_case/src/constants/my_app_strings.dart';
-import 'package:oneloc_study_case/src/widgets/register_elevated_button.dart';
+import 'package:oneloc_study_case/src/widgets/custom_elevated_button.dart';
 import 'package:oneloc_study_case/src/widgets/rich_texts/screen1_kvkk_rich_text.dart';
-import '../../widgets/rich_texts/kvkk_rich_text.dart';
 
 class Screen1 extends StatelessWidget {
   const Screen1({Key? key}) : super(key: key);
@@ -22,7 +21,7 @@ class Screen1 extends StatelessWidget {
                 height: MediaQuery.of(context).size.height,
               ),
               Padding(
-                padding: const EdgeInsets.all(4.0),
+                padding: const EdgeInsets.all(12.0),
                 child: Column(
                   children: [
                     const SizedBox(
@@ -36,7 +35,7 @@ class Screen1 extends StatelessWidget {
                           width: 150,
                         )),
                     const SizedBox(
-                      height: 50,
+                      height: 70,
                     ),
                     Align(
                         alignment: const Alignment(-1.6, -0.5),
@@ -46,9 +45,9 @@ class Screen1 extends StatelessWidget {
                           width: 330,
                         )),
                     const SizedBox(
-                      height: 150,
+                      height: 120,
                     ),
-                    RegisterElevatedButton(
+                    CustomElevatedButton(
                         color: Colors.white,
                         onTap: () {
                           Navigator.pushNamed(context, '/register');
@@ -60,7 +59,7 @@ class Screen1 extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    RegisterElevatedButton(
+                    CustomElevatedButton(
                         color: Colors.transparent.withOpacity(0),
                         onTap: () {
                           Navigator.pushNamed(context, '/login');

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:oneloc_study_case/src/constants/my_app_strings.dart';
 import 'package:oneloc_study_case/src/widgets/custom_app_bar.dart';
 import 'package:oneloc_study_case/src/widgets/custom_text_form_field.dart';
-import 'package:oneloc_study_case/src/widgets/register_elevated_button.dart';
+import 'package:oneloc_study_case/src/widgets/custom_elevated_button.dart';
 import '../../service/auth_service.dart';
 import '../../widgets/rich_texts/hosgeldin_rich_text.dart';
 import '../../widgets/rich_texts/kvkk_rich_text.dart';
@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               CustomTextFormField(
                 obscureText: false,
-                hintText: MyAppStrings.registerPhoneNumber,
+                hintText: MyAppStrings.loginEmail,
                 controller: emailController,
               ),
               const SizedBox(
@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               CustomTextFormField(
                 obscureText: true,
-                hintText: MyAppStrings.loginCreateNewAccount,
+                hintText: MyAppStrings.loginPassword,
                 controller: passwordController,
               ),
               const SizedBox(
@@ -86,9 +86,9 @@ class _LoginPageState extends State<LoginPage> {
     ));
   }
 
-  RegisterElevatedButton buildYeniHesapRegisterElevatedButton(
+  CustomElevatedButton buildYeniHesapRegisterElevatedButton(
       BuildContext context) {
-    return RegisterElevatedButton(
+    return CustomElevatedButton(
       color: Theme.of(context).brightness == Brightness.dark
           ? const Color(0xFF525252) // Dark Theme Color
           : Colors.white, // Light Theme Color
@@ -107,9 +107,8 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  RegisterElevatedButton buildSignInRegisterElevatedButton(
-      BuildContext context) {
-    return RegisterElevatedButton(
+  CustomElevatedButton buildSignInRegisterElevatedButton(BuildContext context) {
+    return CustomElevatedButton(
       color: const Color(0xFF0076FF),
       onTap: () async {
         final authService = AuthService();
@@ -121,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
           Navigator.pushNamed(context, '/state');
         } else {
           setState(() {
-            _errorMessage = 'Kullanıcı girişi hatalı';
+            _errorMessage = authService.responseMessage;
           });
 
           showDialog(
