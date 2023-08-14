@@ -3,13 +3,12 @@ import 'package:http/http.dart' as http;
 
 class AuthService {
   final String baseUrl = "https://case.onelocapp.com";
-  late String responseMessage; // Gelen mesajı tutacak alan
+  late String responseMessage;
 
   bool _processResponse(http.Response response) {
     final responseData = jsonDecode(response.body);
-    responseMessage =
-        responseData['message']; // Gelen mesajı responseMessage'e ata
-    print(responseMessage);
+    responseMessage = responseData['message'];
+
     return response.statusCode == 200;
   }
 
@@ -25,7 +24,6 @@ class AuthService {
       );
       return _processResponse(response);
     } catch (error) {
-      print("Login error: $error");
       return false;
     }
   }
@@ -45,7 +43,6 @@ class AuthService {
       );
       return _processResponse(response);
     } catch (error) {
-      print("Register error: $error");
       return false;
     }
   }
