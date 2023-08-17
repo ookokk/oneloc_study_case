@@ -1,12 +1,5 @@
-# oneloc_study_case
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-
+good character, good developer, good code
 
 
 ![3](https://github.com/ookokk/oneloc_study_case/assets/114760131/14e35a77-0749-4585-97e4-5902bdb7dfb1)
